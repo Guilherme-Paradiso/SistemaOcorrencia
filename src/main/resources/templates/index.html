@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sistema de Ocorrências</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+<div class="container">
+
+<a class="navbar-brand" href="/">Sistema de Ocorrências</a>
+
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="menu">
+
+<ul class="navbar-nav ms-auto">
+
+<li class="nav-item">
+<a class="nav-link" href="/">Início</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/professores">Professores</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/estudantes">Estudantes</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/ocorrencias/nova">Nova Ocorrência</a>
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</nav>
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+        <div class="card-body">
+
+            <h4 class="mb-3">Lista de Ocorrências</h4>
+
+            <div class="row mb-3">
+
+<div class="col-md-4">
+
+<form action="/filtro">
+
+<label>Filtrar por Professor</label>
+
+<select name="professor" class="form-select" onchange="this.form.submit()">
+
+<option value="">Todos</option>
+
+<option th:each="p : ${professores}"
+        th:value="${p.codigo}"
+        th:text="${p.nome}"
+        th:selected="${p.codigo == professorSelecionado}">
+</option>
+</select>
+
+</form>
+
+</div>
+
+<div class="col-md-4">
+
+<form action="/filtro">
+
+<label>Filtrar por Estudante</label>
+
+<select name="estudante" class="form-select" onchange="this.form.submit()">
+
+<option value="">Todos</option>
+
+<option th:each="e : ${estudantes}"
+        th:value="${e.matricula}"
+        th:text="${e.nome}"
+        th:selected="${e.matricula == estudanteSelecionado}">
+</option>
+
+</select>
+
+</form>
+
+</div>
+
+</div>
+
+            <table class="table table-striped table-hover">
+
+                <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>Local</th>
+                    <th>Descrição</th>
+                    <th>Professor</th>
+                    <th>Estudante</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:each="o : ${lista}">
+
+<td th:text="${o.id}"></td>
+<td th:text="${o.data}"></td>
+<td th:text="${o.local}"></td>
+<td th:text="${o.descricao}"></td>
+<td th:text="${o.professor.nome}"></td>
+<td th:text="${o.estudante.nome}"></td>
+
+<td>
+
+<a th:href="@{/ocorrencias/editar/{id}(id=${o.id})}"
+class="btn btn-warning btn-sm">
+Editar
+</a>
+
+<a th:href="@{/ocorrencias/delete/{id}(id=${o.id})}"
+class="btn btn-danger btn-sm">
+Excluir
+</a>
+
+</td>
+
+</tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

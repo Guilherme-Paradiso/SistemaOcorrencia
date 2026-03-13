@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-OcorrenciasApplication<ocorrencias>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.escola.ocorrencias.OcorrenciasApplication",
+            "projectName": "ocorrencias",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
